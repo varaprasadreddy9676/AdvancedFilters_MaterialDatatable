@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
+default = {columnProp: "name"}
   filterValues = {};
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'name', 'username', 'email', 'phone', 'website', 'status'];
@@ -164,6 +164,12 @@ export class AppComponent {
     });
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = JSON.stringify(filterValue);
+  }
+
   // Called on Filter change
   filterChange(filter, event) {
     //let filterValues = {}
@@ -216,3 +222,4 @@ export class AppComponent {
     this.dataSource.filter = "";
   }
 }
+

@@ -1,5 +1,11 @@
 <div>
-  <mat-form-field *ngFor="let filter of filterSelectObj" style="margin-left: 15px;">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="filterChange(default,$event)" placeholder="Filter by Name">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field *ngFor="let filter of filterSelectObj">
     <mat-label>Filter {{filter.name}}</mat-label>
     <select matNativeControl name="{{filter.columnProp}}" [(ngModel)]="filter.modelValue"
       (change)="filterChange(filter,$event)">
@@ -8,7 +14,7 @@
     </select>
   </mat-form-field>
   &nbsp;
-  <button mat-flat-button color="warn" (click)="resetFilters()">Reset</button>
+  <button mat-flat-button (click)="resetFilters()">Reset</button>
 </div>
 
 <table mat-table [dataSource]="dataSource">
